@@ -1,18 +1,23 @@
 import { Query } from "./models/query";
-import * as fs from 'fs';
+import { Query as IQuery } from "./types/query.types";
+import * as fs from "fs";
+import { collectionNftsQuery } from "./queries/collection-nfts.query";
 
-import { orderItemsQuery } from "./queries/order-items.query";
-import { collectionNftsQuery} from './queries/collection-nfts.query';
+function main() {
+  const queryDefinition = collectionNftsQuery;
+  const indexes = generate(queryDefinition);
+  console.log(`Total indexes created: ${indexes.length}`);
+  fs.writeFileSync("./results.json", JSON.stringify(indexes, null, 2));
+}
 
-const query = new Query(collectionNftsQuery);
-const indexes = query.getCombinations();
-const results = query.optimizeIndexes(indexes);
+function generate(q: IQuery) {
+  const query = new Query(q);
+  const indexes = query.getCombinations();
+  const results = query.optimizeIndexes(indexes);
 
-const firestoreIndexes = query.toFirestoreIndexes(results);
-const uniqueIndexes = query.removeDuplicates(firestoreIndexes);
-console.log(`Total indexes created: ${uniqueIndexes.length}`)
+  const firestoreIndexes = query.toFirestoreIndexes(results);
+  const uniqueIndexes = query.removeDuplicates(firestoreIndexes);
+  return uniqueIndexes;
+}
 
-fs.writeFileSync('./results.json', JSON.stringify(uniqueIndexes, null, 2));
-
-
-
+main();
