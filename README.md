@@ -3,7 +3,7 @@ optimize your indexes to automatically detect cases where you could benefit from
 
 ## Generating indexes
 * For each query, create a new file in `src/index-optimizer/queries` 
-    * A query is defined as a group of possible where/orderBy clauses (i.e. )
+    * A query is defined as a group of possible where/orderBy clauses
 * Create query field/query order by/query objects that implement the `Query`, `QueryField`, and `QueryOrderBy` interfaces
 * Each of these includes logic for requiring/excluding other fields to reduce the number of possible index
 * Be as specific as possible to limit the number of possible queries
