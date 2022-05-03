@@ -117,7 +117,7 @@ const orderBy: QueryOrderBy[][] = [orderByRarity, orderByTokenId, orderByListing
 
 export const collectionNftsQuery: IQuery = {
   collectionGroup: "nfts",
-  queryScope: FirestoreQueryScope.CollectionGroup,
+  queryScope: FirestoreQueryScope.Collection,
   fields: fields,
   orderBy: orderBy,
 };
