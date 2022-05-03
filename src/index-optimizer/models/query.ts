@@ -96,8 +96,6 @@ export class Query {
             }
         }
 
-        // TODO add in exclude
-        // TODO remove duplicates
         // TODO make sure orderBy is last
         console.log(`Found: ${orderByCombinations.length} orderBy combinations`);
         console.log(`Found: ${fieldCombinations.length} field combinations`);
@@ -119,6 +117,23 @@ export class Query {
         });
 
         console.log(`Found: ${indexes.length} indexes after filtering out indexes that don't include all required fields`);
+
+        /**
+         * remove indexes that are include exclude fields
+         */
+         indexes = indexes.filter((index) => {
+            const fieldIds = new Set(index.map((indexField) => indexField.id));
+            for(const field of index) {
+                for(const excludedField of field.context.excludes) {
+                    if(fieldIds.has(excludedField)) {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        });
+
+        console.log(`Found: ${indexes.length} indexes after filtering out indexes that include excluded fields`);
 
 
         return indexes;
