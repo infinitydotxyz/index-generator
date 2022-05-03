@@ -4,7 +4,7 @@ import * as fs from 'fs';
 import { orderItemsQuery } from "./queries/order-items.query";
 import { collectionNftsQuery} from './queries/collection-nfts.query';
 
-const query = new Query(orderItemsQuery);
+const query = new Query(collectionNftsQuery);
 const indexes = query.getCombinations();
 const results = query.optimizeIndexes(indexes);
 

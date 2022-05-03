@@ -1,91 +1,120 @@
 import { FirestoreIndexOrder } from "../../firestore/types/firestore-index-order.types";
 import { FirestoreQueryOperation } from "../../firestore/types/firestore-query-operations.types";
 import { FirestoreQueryScope } from "../../firestore/types/firestore-query-scope.types";
-import { Query as IQuery, QueryField, QueryOrderBy } from "../types/query.types";
+import {
+  Query as IQuery,
+  QueryField,
+  QueryOrderBy,
+} from "../types/query.types";
 
-
+const hasListing = {
+  id: "hasListing",
+  fieldPath: "ordersSnippet.listing.hasOrder",
+  operations: [FirestoreQueryOperation.EqualTo],
+  required: false,
+  require: [],
+  exclude: [],
+};
+const hasOffer = {
+  id: "hasOffer",
+  fieldPath: "ordersSnippet.offer.hasOrder",
+  operations: [FirestoreQueryOperation.EqualTo],
+  required: false,
+  require: [],
+  exclude: [],
+};
+const traits = {
+  id: "traits",
+  fieldPath: "metadata.attributes",
+  operations: [FirestoreQueryOperation.ArrayContainsAny],
+  required: false,
+  require: [],
+  exclude: [],
+};
+const listingStartPrice = {
+  id: "startPriceListing",
+  fieldPath: "ordersSnippet.listing.orderItem.startPriceEth",
+  operations: [
+    FirestoreQueryOperation.GreaterThanOrEqualTo,
+    FirestoreQueryOperation.LessThanOrEqualTo,
+  ],
+  required: false,
+  require: [hasListing.id],
+  exclude: [],
+};
+const offerStartPrice = {
+  id: "startPriceOffer",
+  fieldPath: "ordersSnippet.offer.orderItem.startPriceEth",
+  operations: [
+    FirestoreQueryOperation.GreaterThanOrEqualTo,
+    FirestoreQueryOperation.LessThanOrEqualTo,
+  ],
+  required: false,
+  require: [hasOffer.id],
+  exclude: [],
+};
 
 const fields: QueryField[] = [
-    {
-        id: "hasListing",
-        fieldPath: "ordersSnippet.listing.hasOrder",
-        operations: [FirestoreQueryOperation.EqualTo],
-        required: false,
-        require: [],
-        exclude: []
-    },
-    {
-        id: "hasOffer",
-        fieldPath: "ordersSnippet.offer.hasOrder",
-        operations: [FirestoreQueryOperation.EqualTo],
-        required: false,
-        require: [],
-        exclude: []
-    },
-    {
-        id: "traits",
-        fieldPath: 'metadata.attributes',
-        operations: [FirestoreQueryOperation.ArrayContainsAny],
-        required: false,
-        require: [],
-        exclude: []
-    },
-    {
-        id: "startPriceListing",
-        fieldPath: "ordersSnippet.listing.orderItem.startPriceEth",
-        operations: [FirestoreQueryOperation.GreaterThanOrEqualTo, FirestoreQueryOperation.LessThanOrEqualTo],
-        required: false,
-        require: [],
-        exclude: []
-    },
-    {
-        id: "startPriceOffer",
-        fieldPath: "ordersSnippet.offer.orderItem.startPriceEth",
-        operations: [FirestoreQueryOperation.GreaterThanOrEqualTo, FirestoreQueryOperation.LessThanOrEqualTo],
-        required: false,
-        require: [],
-        exclude: []
-    },
+  hasListing,
+  hasOffer,
+  traits,
+  listingStartPrice,
+  offerStartPrice,
 ];
 
-const orderBy: QueryOrderBy[][] = [
-    [
-        {
-            id: "rarityRank",
-            fieldPath: "rarityRank",
-            orderDirections: [FirestoreIndexOrder.Ascending, FirestoreIndexOrder.Descending],
-            requires: []
-        }
+const orderByRarity = [
+  {
+    id: "rarityRank",
+    fieldPath: "rarityRank",
+    orderDirections: [
+      FirestoreIndexOrder.Ascending,
+      FirestoreIndexOrder.Descending,
     ],
-    [
-        {
-            id: "tokenId",
-            fieldPath: "tokenId",
-            orderDirections: [FirestoreIndexOrder.Ascending, FirestoreIndexOrder.Descending],
-            requires: []
-        }
-    ],
-    [
-        {
-            id: 'priceListing',
-            fieldPath: "ordersSnippet.listing.orderItem.startPriceEth",
-            orderDirections: [FirestoreIndexOrder.Ascending, FirestoreIndexOrder.Descending],
-            requires: []
-        }
-    ],
-    [
-        {
-            id: 'priceOffer',
-            fieldPath: "ordersSnippet.offer.orderItem.startPriceEth",
-            orderDirections: [FirestoreIndexOrder.Ascending, FirestoreIndexOrder.Descending],
-            requires: []
-        }
-    ]
+    requires: [],
+  },
 ];
+
+const orderByTokenId = [
+  {
+    id: "tokenId",
+    fieldPath: "tokenId",
+    orderDirections: [
+      FirestoreIndexOrder.Ascending,
+      FirestoreIndexOrder.Descending,
+    ],
+    requires: [],
+  },
+];
+
+const orderByListingPrice = [
+  {
+    id: "priceListing",
+    fieldPath: "ordersSnippet.listing.orderItem.startPriceEth",
+    orderDirections: [
+      FirestoreIndexOrder.Ascending,
+      FirestoreIndexOrder.Descending,
+    ],
+    requires: [],
+  },
+];
+
+const orderByOfferPrice = [
+  {
+    id: "priceOffer",
+    fieldPath: "ordersSnippet.offer.orderItem.startPriceEth",
+    orderDirections: [
+      FirestoreIndexOrder.Ascending,
+      FirestoreIndexOrder.Descending,
+    ],
+    requires: [],
+  },
+];
+
+const orderBy: QueryOrderBy[][] = [orderByRarity, orderByTokenId, orderByListingPrice, orderByOfferPrice];
 
 export const collectionNftsQuery: IQuery = {
-    collectionGroup: "orderItems",
-    queryScope: FirestoreQueryScope.CollectionGroup,
-    fields: fields,
-    orderBy: orderBy
+  collectionGroup: "orderItems",
+  queryScope: FirestoreQueryScope.CollectionGroup,
+  fields: fields,
+  orderBy: orderBy,
 };
