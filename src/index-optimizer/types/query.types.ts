@@ -39,7 +39,7 @@ export interface QueryOrderBy {
     id: string;
     fieldPath: string;
     orderDirections: FirestoreIndexOrder[];
-    requires: string[];
+    require: string[];
 }
 
 export interface Query {

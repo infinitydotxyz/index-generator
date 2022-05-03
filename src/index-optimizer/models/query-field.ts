@@ -37,6 +37,10 @@ export class QueryField extends AbstractQueryField {
         }
     }
 
+    public get requires() {
+        return this.queryField.require;
+    }
+
     public getRequiredFields(queryFields: QueryField[]) {
         const requires = new Set(this.queryField.require);
         const requiredFields = queryFields.filter((item) => requires.has(item.id));

@@ -70,7 +70,7 @@ const orderByRarity = [
       FirestoreIndexOrder.Ascending,
       FirestoreIndexOrder.Descending,
     ],
-    requires: [],
+    require: [],
   },
 ];
 
@@ -82,7 +82,7 @@ const orderByTokenId = [
       FirestoreIndexOrder.Ascending,
       FirestoreIndexOrder.Descending,
     ],
-    requires: [],
+    require: [],
   },
 ];
 
@@ -94,7 +94,7 @@ const orderByListingPrice = [
       FirestoreIndexOrder.Ascending,
       FirestoreIndexOrder.Descending,
     ],
-    requires: [],
+    require: [],
   },
 ];
 
@@ -106,7 +106,7 @@ const orderByOfferPrice = [
       FirestoreIndexOrder.Ascending,
       FirestoreIndexOrder.Descending,
     ],
-    requires: [],
+    require: [],
   },
 ];
 

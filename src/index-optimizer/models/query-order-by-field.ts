@@ -11,6 +11,10 @@ export class QueryOrderByField extends AbstractQueryField {
         super();
     }
 
+    public get requires() {
+        return this.queryField.require;
+    }
+
     getDirectionalId(direction: FirestoreIndexOrder) {
         return `${this.queryField.id}-${direction}`;
     }

@@ -60,7 +60,7 @@ const orderBy: QueryOrderBy[][] = [
             id: "orderByStartPriceEth",
             fieldPath: "startPriceEth",
             orderDirections: [FirestoreIndexOrder.Ascending, FirestoreIndexOrder.Descending],
-            requires: []
+            require: []
         }
     ],
     [
@@ -68,7 +68,7 @@ const orderBy: QueryOrderBy[][] = [
             id: "orderByStartTime",
             fieldPath: "startTimeMs",
             orderDirections: [FirestoreIndexOrder.Ascending, FirestoreIndexOrder.Descending],
-            requires: []
+            require: []
         }
     ],
     [
@@ -76,7 +76,7 @@ const orderBy: QueryOrderBy[][] = [
             id: 'orderByEndTime',
             fieldPath: 'endTimeMs',
             orderDirections: [FirestoreIndexOrder.Ascending, FirestoreIndexOrder.Descending],
-            requires: []
+            require: []
         }
     ]
 ];

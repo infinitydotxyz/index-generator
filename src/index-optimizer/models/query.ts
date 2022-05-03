@@ -96,12 +96,30 @@ export class Query {
             }
         }
 
-        // TODO add in exclude/require
+        // TODO add in exclude
         // TODO remove duplicates
         // TODO make sure orderBy is last
         console.log(`Found: ${orderByCombinations.length} orderBy combinations`);
         console.log(`Found: ${fieldCombinations.length} field combinations`);
-        console.log(`Found: ${indexes.length} indexes`);
+        console.log(`Found: ${indexes.length} possible indexes`);
+
+        /**
+         * remove indexes that don't include all required fields
+         */
+        indexes = indexes.filter((index) => {
+            const fieldIds = new Set(index.map((indexField) => indexField.id));
+            for(const field of index) {
+                for(const requiredField of field.context.requires) {
+                    if(!fieldIds.has(requiredField)) {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        });
+
+        console.log(`Found: ${indexes.length} indexes after filtering out indexes that don't include all required fields`);
+
 
         return indexes;
     }
@@ -144,8 +162,6 @@ export class Query {
                             | WhereQueryFieldIndex
                         )[];
                         optimized.push(index);
-                        console.log(JSON.stringify(index, null, 2));
-
                     }
                 }
                 optimizedIndexes = [...optimizedIndexes, ...optimized];
