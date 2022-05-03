@@ -13,7 +13,7 @@ optimize your indexes to automatically detect cases where you could benefit from
 
 ## Goals
 * Support taking a `firestore.indexes.json` file and returning a file with optimized indexes - via index merging 
-    * Needs more research into what indexes can be merged
+    * Needs more research into what indexes can be merged and the context required
 * Take a query definition and return the indexes that are required to support it
 
 ## Resources
