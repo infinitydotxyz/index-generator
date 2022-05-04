@@ -20,3 +20,10 @@ optimize your indexes to automatically detect cases where you could benefit from
 * [Firestore index definitions](https://firebase.google.com/docs/reference/firestore/indexes/) 
 * [Index merging](https://firebase.google.com/docs/firestore/query-data/index-overview#taking_advantage_of_index_merging)
     * can index merging be used with relational operators? <= >=
+
+
+## Reference
+* By default firestore is configured to automatically create single field indexes for the collection scope
+    * Check automatic index settings in the firebase console > indexes > single field indexes
+    * Trying to order documents from a collection group will error - create an exemption on the specific field you need to order by to support this query
+* Firestore is able to merge indexes for queries using only `==` and `orderBy` clauses. Using `<=` or `>=` will require a composite index.
