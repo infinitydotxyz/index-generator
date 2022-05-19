@@ -95,8 +95,7 @@ export class Query {
                 indexes.push([...fields, ...orderBy]);
             }
         }
-
-        // TODO make sure orderBy is last
+        
         console.log(`Found: ${orderByCombinations.length} orderBy combinations`);
         console.log(`Found: ${fieldCombinations.length} field combinations`);
         console.log(`Found: ${indexes.length} possible indexes`);
@@ -134,7 +133,6 @@ export class Query {
         });
 
         console.log(`Found: ${indexes.length} indexes after filtering out indexes that include excluded fields`);
-
 
         return indexes;
     }
@@ -199,6 +197,7 @@ export class Query {
             console.log(
                 `Optimization resulted in ${optimized - startedWith} more indexes. Returning original indexes.`
             );
+       
             return indexes;
         }
     }
@@ -240,15 +239,18 @@ export class Query {
         }
         for(const firestoreIndex of firestoreIndexes) {
             const fieldIds = new Set();
-            const uniqueFields = firestoreIndex.fields.filter((field) => {
+            // remove duplicates 
+            const uniqueFields = firestoreIndex.fields.reduce((acc: FirestoreIndexField[], field) => {
                 const id = fieldId(field);
                 if(fieldIds.has(id)) {
-                    return false;
+                    // keep the last field instead of the preceding one
+                    acc = acc.filter((item) => fieldId(item) !== id);
+                    return [...acc, field];
                 } else {
-                    fieldIds.add(id)
-                    return true;
+                    fieldIds.add(id);
+                    return [...acc, field];
                 }
-            });
+            }, []);
             firestoreIndex.fields = uniqueFields;
         }
 
