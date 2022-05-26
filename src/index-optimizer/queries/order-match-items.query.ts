@@ -18,7 +18,29 @@ const users = {
   exclude: [],
 };
 
-const fields: QueryField[] = [users];
+const collectionAddress = {
+  id: "collectionAddress",
+  fieldPath: "collectionAddress",
+  operations: [
+    FirestoreQueryOperation.EqualTo,
+  ],
+  required: false,
+  require: [],
+  exclude: [],
+};
+
+const tokenId = {
+  id: "tokenId",
+  fieldPath: "tokenId",
+  operations: [
+    FirestoreQueryOperation.EqualTo,
+  ],
+  required: false,
+  require: [],
+  exclude: [],
+};
+
+const fields: QueryField[] = [users, collectionAddress, tokenId];
 
 const orderByTimestamp: QueryOrderBy[] = [
   {
@@ -32,7 +54,19 @@ const orderByTimestamp: QueryOrderBy[] = [
   },
 ];
 
-const orderBy: QueryOrderBy[][] = [orderByTimestamp];
+const orderByCreatedAt: QueryOrderBy[] = [
+  {
+    id: "createdAt",
+    fieldPath: "createdAt",
+    orderDirections: [
+      FirestoreIndexOrder.Ascending,
+      FirestoreIndexOrder.Descending,
+    ],
+    require: [],
+  },
+];
+
+const orderBy: QueryOrderBy[][] = [orderByTimestamp, orderByCreatedAt];
 
 export const orderMatchItems: IQuery = {
   collectionGroup: "orderMatchItems",
