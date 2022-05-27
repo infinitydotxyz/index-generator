@@ -83,7 +83,7 @@ const orderBy: QueryOrderBy[][] = [orderByTimestamp, orderByCreatedAt];
 
 export const orderMatchesForLister: IQuery = {
   collectionGroup: "orderMatches",
-  queryScope: FirestoreQueryScope.CollectionGroup,
+  queryScope: FirestoreQueryScope.Collection,
   fields: listerFields,
   orderBy: orderBy,
 };
@@ -91,7 +91,7 @@ export const orderMatchesForLister: IQuery = {
 
 export const orderMatchesForOfferer: IQuery = {
   collectionGroup: "orderMatches",
-  queryScope: FirestoreQueryScope.CollectionGroup,
+  queryScope: FirestoreQueryScope.Collection,
   fields: offererFields,
   orderBy: orderBy,
 };

@@ -8,7 +8,7 @@ import { orderConstraintQueries } from "./queries/order-constraint.query";
 import { orderMatchesForLister, orderMatchesForOfferer} from "./queries/order-matches.query";
 
 function main() {
-  const queryDefinition = orderMatchesForOfferer;
+  const queryDefinition = orderMatchesForLister;
   const indexes = generate(queryDefinition);
   console.log(`Total indexes created: ${indexes.length}`);
   fs.writeFileSync("./results.json", JSON.stringify(indexes, null, 2));
