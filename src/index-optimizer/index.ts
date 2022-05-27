@@ -5,10 +5,10 @@ import { collectionNftsQuery } from "./queries/collection-nfts.query";
 import { orderItemsQuery } from "./queries/order-items.query";
 import{ userNftsWithOrdersQuery } from "./queries/user-nfts-with-orders.query";
 import { orderConstraintQueries } from "./queries/order-constraint.query";
-import { orderMatchItems } from "./queries/order-match-items.query";
+import { orderMatchesForLister, orderMatchesForOfferer} from "./queries/order-matches.query";
 
 function main() {
-  const queryDefinition = orderMatchItems;
+  const queryDefinition = orderMatchesForOfferer;
   const indexes = generate(queryDefinition);
   console.log(`Total indexes created: ${indexes.length}`);
   fs.writeFileSync("./results.json", JSON.stringify(indexes, null, 2));

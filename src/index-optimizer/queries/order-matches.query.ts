@@ -7,40 +7,53 @@ import {
   QueryOrderBy,
 } from "../types/query.types";
 
-const users = {
-  id: "usersInvolved",
-  fieldPath: "usersInvolved",
+
+const lister = {
+  id: "listerAddress",
+  fieldPath: "listerAddress",
   operations: [
-    FirestoreQueryOperation.ArrayContains,
+    FirestoreQueryOperation.EqualTo,
   ],
   required: true,
   require: [],
   exclude: [],
 };
 
-const collectionAddress = {
-  id: "collectionAddress",
-  fieldPath: "collectionAddress",
+const offerer = {
+  id: "offererAddress",
+  fieldPath: "offererAddress",
   operations: [
     FirestoreQueryOperation.EqualTo,
+  ],
+  required: true,
+  require: [],
+  exclude: [],
+};
+
+const collectionAddresses = {
+  id: "collectionAddresses",
+  fieldPath: "collectionAddresses",
+  operations: [
+    FirestoreQueryOperation.ArrayContains,
   ],
   required: false,
   require: [],
   exclude: [],
 };
 
-const tokenId = {
-  id: "tokenId",
-  fieldPath: "tokenId",
+const tokens = {
+  id: "tokens",
+  fieldPath: "tokens",
   operations: [
-    FirestoreQueryOperation.EqualTo,
+    FirestoreQueryOperation.ArrayContains,
   ],
   required: false,
   require: [],
-  exclude: [],
+  exclude: [collectionAddresses.id],
 };
 
-const fields: QueryField[] = [users, collectionAddress, tokenId];
+const offererFields: QueryField[] = [offerer, collectionAddresses, tokens];
+const listerFields: QueryField[] = [lister, collectionAddresses, tokens];
 
 const orderByTimestamp: QueryOrderBy[] = [
   {
@@ -68,9 +81,17 @@ const orderByCreatedAt: QueryOrderBy[] = [
 
 const orderBy: QueryOrderBy[][] = [orderByTimestamp, orderByCreatedAt];
 
-export const orderMatchItems: IQuery = {
-  collectionGroup: "orderMatchItems",
+export const orderMatchesForLister: IQuery = {
+  collectionGroup: "orderMatches",
   queryScope: FirestoreQueryScope.CollectionGroup,
-  fields: fields,
+  fields: listerFields,
+  orderBy: orderBy,
+};
+
+
+export const orderMatchesForOfferer: IQuery = {
+  collectionGroup: "orderMatches",
+  queryScope: FirestoreQueryScope.CollectionGroup,
+  fields: offererFields,
   orderBy: orderBy,
 };
