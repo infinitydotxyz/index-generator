@@ -65,6 +65,14 @@ const orderByTimestamp: QueryOrderBy[] = [
     ],
     require: [],
   },
+  {
+    id: "id",
+    fieldPath: "id",
+    orderDirections: [
+      FirestoreIndexOrder.Ascending,
+    ],
+    require: [],
+  }
 ];
 
 const orderByCreatedAt: QueryOrderBy[] = [
@@ -77,6 +85,14 @@ const orderByCreatedAt: QueryOrderBy[] = [
     ],
     require: [],
   },
+  {
+    id: "id",
+    fieldPath: "id",
+    orderDirections: [
+      FirestoreIndexOrder.Ascending,
+    ],
+    require: [],
+  }
 ];
 
 const orderBy: QueryOrderBy[][] = [orderByTimestamp, orderByCreatedAt];
