@@ -6,9 +6,10 @@ import { orderItemsQuery } from "./queries/order-items.query";
 import{ userNftsWithOrdersQuery } from "./queries/user-nfts-with-orders.query";
 import { orderConstraintQueries } from "./queries/order-constraint.query";
 import { orderMatchesForLister, orderMatchesForOfferer} from "./queries/order-matches.query";
+import { txBroadcasterMatchListener } from "./queries/tx-broadcaster-match-listener.query";
 
 function main() {
-  const queryDefinition = orderMatchesForOfferer;
+  const queryDefinition = txBroadcasterMatchListener;
   const indexes = generate(queryDefinition);
   console.log(`Total indexes created: ${indexes.length}`);
   fs.writeFileSync("./results.json", JSON.stringify(indexes, null, 2));
