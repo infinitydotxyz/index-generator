@@ -77,7 +77,22 @@ const orderByRarity: QueryOrderBy[] = [
   },
 ];
 
-const orderByTokenId: QueryOrderBy[] = [
+
+
+const orderByTokenIdNumeric: QueryOrderBy[] = [
+  {
+    id: "tokenIdNumeric",
+    fieldPath: "tokenIdNumeric",
+    orderDirections: [
+      FirestoreIndexOrder.Ascending,
+      FirestoreIndexOrder.Descending,
+    ],
+    require: [],
+  },
+];
+
+
+const orderByTokenId: QueryOrderBy = 
   {
     id: "tokenId",
     fieldPath: "tokenId",
@@ -86,8 +101,7 @@ const orderByTokenId: QueryOrderBy[] = [
       FirestoreIndexOrder.Descending,
     ],
     require: [],
-  },
-];
+  };
 
 const orderByListingPrice: QueryOrderBy[] = [
   {
@@ -97,8 +111,9 @@ const orderByListingPrice: QueryOrderBy[] = [
       FirestoreIndexOrder.Ascending,
       FirestoreIndexOrder.Descending,
     ],
-    require: [],
+    require: [hasListing.id],
   },
+  orderByTokenId
 ];
 
 const orderByOfferPrice: QueryOrderBy[] = [
@@ -109,11 +124,12 @@ const orderByOfferPrice: QueryOrderBy[] = [
       FirestoreIndexOrder.Ascending,
       FirestoreIndexOrder.Descending,
     ],
-    require: [],
+    require: [hasOffer.id],
   },
+  orderByTokenId
 ];
 
-const orderBy: QueryOrderBy[][] = [orderByRarity, orderByTokenId, orderByListingPrice, orderByOfferPrice];
+const orderBy: QueryOrderBy[][] = [orderByRarity, orderByTokenIdNumeric, orderByListingPrice, orderByOfferPrice];
 
 export const collectionNftsQuery: IQuery = {
   collectionGroup: "nfts",

@@ -9,7 +9,7 @@ import { orderMatchesForLister, orderMatchesForOfferer} from "./queries/order-ma
 import { txBroadcasterMatchListener } from "./queries/tx-broadcaster-match-listener.query";
 
 function main() {
-  const queryDefinition = txBroadcasterMatchListener;
+  const queryDefinition = collectionNftsQuery;
   const indexes = generate(queryDefinition);
   console.log(`Total indexes created: ${indexes.length}`);
   fs.writeFileSync("./results.json", JSON.stringify(indexes, null, 2));
