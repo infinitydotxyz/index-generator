@@ -53,22 +53,22 @@ const collections: QueryField = {
 };
 
 const makerAddress: QueryField = {
-    id: "makerAddress",
-    fieldPath: "makerAddress",
-    operations: [FirestoreQueryOperation.EqualTo],
-    required: false,
-    require: [isSellOrder.id],
-    exclude: [numItems.id],
-  };
-  
-  const takerAddress: QueryField = {
-    id: "takerAddress",
-    fieldPath: "takerAddress",
-    operations: [FirestoreQueryOperation.EqualTo],
-    required: false,
-    require: [isSellOrder.id],
-    exclude: [numItems.id],
-  };
+  id: "makerAddress",
+  fieldPath: "makerAddress",
+  operations: [FirestoreQueryOperation.EqualTo],
+  required: false,
+  require: [isSellOrder.id],
+  exclude: [numItems.id],
+};
+
+const takerAddress: QueryField = {
+  id: "takerAddress",
+  fieldPath: "takerAddress",
+  operations: [FirestoreQueryOperation.EqualTo],
+  required: false,
+  require: [isSellOrder.id],
+  exclude: [numItems.id],
+};
 
 const price = {
   id: "price",

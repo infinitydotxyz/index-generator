@@ -1,0 +1,12 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node-terminal",
+      "name": "Run Script: gen",
+      "request": "launch",
+      "command": "npm run gen",
+      "cwd": "${workspaceFolder}"
+    }
+  ]
+}

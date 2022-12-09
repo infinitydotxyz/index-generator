@@ -7,7 +7,8 @@
   "scripts": {
     "start": "ts-node ./src/index.ts",
     "start:dev": "ts-node-dev ./src/index.ts",
-    "start:opt": "ts-node ./src/index-optimizer/index.ts"
+    "start:opt": "ts-node ./src/index-optimizer/index.ts",
+    "gen": "ts-node ./src/index-optimizer/index.ts"
   },
   "devDependencies": {
     "@types/node": "^17.0.30",
