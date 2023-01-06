@@ -59,6 +59,15 @@ const chainId: QueryField = {
   exclude: [],
 };
 
+const collection: QueryField = {
+  id: "collection",
+  fieldPath: "order.collection",
+  operations: [FirestoreQueryOperation.EqualTo],
+  required: false,
+  require: [],
+  exclude: [],
+};
+
 const orderByOrderIdASC: QueryOrderBy = {
   id: "orderId",
   fieldPath: "metadata.id",
@@ -176,14 +185,14 @@ export const tokenOrdersByTimeQuery: Query = {
 export const makerOrdersByPriceQuery: Query = {
   collectionGroup: "makerV2Orders",
   queryScope: FirestoreQueryScope.Collection,
-  fields: [...orderByPriceFields, statusNotRequired],
+  fields: [...orderByPriceFields, statusNotRequired, collection],
   orderBy: orderByPrice,
 };
 
 export const makerOrdersByTimeQuery: Query = {
   collectionGroup: "makerV2Orders",
   queryScope: FirestoreQueryScope.Collection,
-  fields: [...orderByTimeFields, statusNotRequired],
+  fields: [...orderByTimeFields, statusNotRequired, collection],
   orderBy: orderByTime,
 };
 
@@ -199,13 +208,13 @@ const owner: QueryField = {
 export const takerOrdersByPriceQuery: Query = {
   collectionGroup: "tokenV2Orders",
   queryScope: FirestoreQueryScope.CollectionGroup,
-  fields: [...orderByPriceFields, statusRequired, owner],
+  fields: [...orderByPriceFields, statusRequired, owner, collection],
   orderBy: orderByPrice,
 };
 
 export const takerOrdersByTimeQuery: Query = {
   collectionGroup: "tokenV2Orders",
   queryScope: FirestoreQueryScope.CollectionGroup,
-  fields: [...orderByTimeFields, statusRequired, owner],
+  fields: [...orderByTimeFields, statusRequired, owner, collection],
   orderBy: orderByTime,
 };
