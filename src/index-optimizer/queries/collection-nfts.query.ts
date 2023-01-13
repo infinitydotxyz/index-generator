@@ -7,7 +7,7 @@ import {
   QueryOrderBy,
 } from "../types/query.types";
 
-const hasListing: QueryField  = {
+const hasListing: QueryField = {
   id: "hasListing",
   fieldPath: "ordersSnippet.listing.hasOrder",
   operations: [FirestoreQueryOperation.EqualTo],
@@ -65,20 +65,6 @@ const fields: QueryField[] = [
   offerStartPrice,
 ];
 
-const orderByRarity: QueryOrderBy[] = [
-  {
-    id: "rarityRank",
-    fieldPath: "rarityRank",
-    orderDirections: [
-      FirestoreIndexOrder.Ascending,
-      FirestoreIndexOrder.Descending,
-    ],
-    require: [],
-  },
-];
-
-
-
 const orderByTokenIdNumeric: QueryOrderBy[] = [
   {
     id: "tokenIdNumeric",
@@ -91,18 +77,6 @@ const orderByTokenIdNumeric: QueryOrderBy[] = [
   },
 ];
 
-
-const orderByTokenId: QueryOrderBy = 
-  {
-    id: "tokenId",
-    fieldPath: "tokenId",
-    orderDirections: [
-      FirestoreIndexOrder.Ascending,
-      FirestoreIndexOrder.Descending,
-    ],
-    require: [],
-  };
-
 const orderByListingPrice: QueryOrderBy[] = [
   {
     id: "priceListing",
@@ -113,7 +87,7 @@ const orderByListingPrice: QueryOrderBy[] = [
     ],
     require: [hasListing.id],
   },
-  orderByTokenId
+  orderByTokenIdNumeric[0],
 ];
 
 const orderByOfferPrice: QueryOrderBy[] = [
@@ -126,10 +100,14 @@ const orderByOfferPrice: QueryOrderBy[] = [
     ],
     require: [hasOffer.id],
   },
-  orderByTokenId
+  orderByTokenIdNumeric[0],
 ];
 
-const orderBy: QueryOrderBy[][] = [orderByRarity, orderByTokenIdNumeric, orderByListingPrice, orderByOfferPrice];
+const orderBy: QueryOrderBy[][] = [
+  orderByTokenIdNumeric,
+  orderByListingPrice,
+  orderByOfferPrice,
+];
 
 export const collectionNftsQuery: IQuery = {
   collectionGroup: "nfts",
