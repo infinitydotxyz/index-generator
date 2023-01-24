@@ -59,6 +59,15 @@ const chainId: QueryField = {
   exclude: [],
 };
 
+const onlyCollectionWide: QueryField = {
+  id: "collectionWide",
+  fieldPath: "order.orderKind.numTokens",
+  operations: [FirestoreQueryOperation.EqualTo],
+  required: false,
+  require: [],
+  exclude: [],
+};
+
 const collection: QueryField = {
   id: "collection",
   fieldPath: "order.collection",
@@ -157,14 +166,14 @@ const orderByTimeFields = [isSellOrder, chainId];
 export const collectionOrdersByPriceQuery: Query = {
   collectionGroup: "collectionV2Orders",
   queryScope: FirestoreQueryScope.Collection,
-  fields: [...orderByPriceFields, statusRequired],
+  fields: [...orderByPriceFields, onlyCollectionWide, statusRequired],
   orderBy: orderByPrice,
 };
 
 export const collectionOrdersByTimeQuery: Query = {
   collectionGroup: "collectionV2Orders",
   queryScope: FirestoreQueryScope.Collection,
-  fields: [...orderByTimeFields, statusRequired],
+  fields: [...orderByTimeFields, onlyCollectionWide, statusRequired],
   orderBy: orderByTime,
 };
 

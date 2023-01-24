@@ -24,17 +24,17 @@ import { FirestoreIndex } from "../firestore/types/firestore-index.types";
 
 function main() {
   // const queryDefinition = collectionOrdersByPriceQuery;
-  // const queryDefinitions = [
-  //   collectionOrdersByPriceQuery,
-  //   collectionOrdersByTimeQuery,
-  //   tokenOrdersByPriceQuery,
-  //   tokenOrdersByTimeQuery,
-  //   makerOrdersByPriceQuery,
-  //   makerOrdersByTimeQuery,
-  //   takerOrdersByPriceQuery,
-  //   takerOrdersByTimeQuery,
-  // ];
-  const queryDefinitions = [collectionNftsQuery];
+  const queryDefinitions = [
+    collectionOrdersByPriceQuery,
+    collectionOrdersByTimeQuery,
+    tokenOrdersByPriceQuery,
+    tokenOrdersByTimeQuery,
+    makerOrdersByPriceQuery,
+    makerOrdersByTimeQuery,
+    takerOrdersByPriceQuery,
+    takerOrdersByTimeQuery,
+  ];
+  // const queryDefinitions = [collectionNftsQuery];
   const indexes = generate(queryDefinitions);
   console.log(`Total indexes created: ${indexes.length}`);
   fs.writeFileSync("./results.json", JSON.stringify(indexes, null, 2));
