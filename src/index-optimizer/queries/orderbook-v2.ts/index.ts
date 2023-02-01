@@ -157,10 +157,7 @@ const orderByPrice: QueryOrderBy[][] = [
 ];
 const orderByPriceFields = [isSellOrder, minPrice, maxPrice, chainId];
 
-const orderByTime: QueryOrderBy[][] = [
-  orderByStartTimeASC,
-  orderByStartTimeDESC,
-];
+const orderByTime: QueryOrderBy[][] = [orderByStartTimeDESC];
 const orderByTimeFields = [isSellOrder, chainId];
 
 export const collectionOrdersByPriceQuery: Query = {
